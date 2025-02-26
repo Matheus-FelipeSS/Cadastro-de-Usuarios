@@ -66,11 +66,9 @@ form {
   
   
 
-
   & p {
     color: #fff;
     font-weight: bold;
-    
   }
 
   & span {
@@ -82,8 +80,6 @@ form {
     border: none;
     cursor: pointer;
     gap: 10px;
-    
-    
   }
   
   & .button-edit-delet {
@@ -95,6 +91,4 @@ form {
   & button:hover {
     opacity: 0.5;
   }
-
-
 }
