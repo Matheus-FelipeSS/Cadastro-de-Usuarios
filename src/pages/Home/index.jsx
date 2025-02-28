@@ -8,6 +8,7 @@ function Home() {
   const [users, setUsers] = useState([]);
   const [editingUser, setEditingUser] = useState();
   const [emailError, setEmailError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const inputName = useRef();
   const inputAge = useRef();
@@ -30,6 +31,8 @@ function Home() {
       email: inputEmail.current.value,
     });
     getUsers();
+    resetForm();  
+    setSuccessMessage ("Usuário cadastrado com sucesso!");
   }
 
   async function updateUser(id) {
@@ -40,6 +43,8 @@ function Home() {
     });
     getUsers();
     setEditingUser();
+    resetForm();
+    setSuccessMessage("Usuário atualizado com sucesso!");
   }
 
   async function deleteUser(id) {
@@ -75,9 +80,15 @@ function Home() {
     }
   };
 
+  const resetForm = () => {
+    inputName.current.value = "";
+    inputAge.current.value = "";
+    inputEmail.current.value = "";
+  };
+
   useEffect(() => {
     getUsers();
-  }, []);
+  }, );
 
   return (
     <div className="container">
@@ -95,6 +106,9 @@ function Home() {
           {editingUser ? "Atualizar" : "Cadastrar"}
         </button>
       </form>
+
+       
+       {successMessage && <div className="success-message">{successMessage}</div>}
 
       {users.map((user) => (
         <div key={user.id} className="card">
