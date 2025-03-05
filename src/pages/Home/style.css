@@ -1,4 +1,3 @@
-
 .container {
   display: flex;
   align-items: center;
@@ -7,7 +6,7 @@
 }
 
 h1 {
-  color: #fff;
+  color: #000000;
   font-size: 25px;
   text-align: center;
 }
@@ -18,19 +17,19 @@ form {
   gap: 30px;
   padding: 30px;
   border-radius: 10px;
-  background-color: #2e2d4e;
+  background-color: #32d7ec9f;
   max-width: 65%;
   width: 400px;
   margin-bottom: 20px;
 
   & button {
     border-radius: 30px;
-    background-color: #8b8ae1;
+    background-color: #21c4dafd;
     height: 40px;
     border: none;
     font-weight: bold;
     cursor: pointer;
-    color: #fff;
+    color: #000000;
     font-size: 15px;
   }
 
@@ -42,8 +41,8 @@ form {
     border: 1px solid #48456c;
     border-radius: 30px;
     height: 40px;
-    background: #2e2d4e;
-    color: #fff;
+    background: #21c4dafd;
+    color: #000000;
     font-size: 16px;
     padding-left: 10px;
     outline: none;
@@ -53,7 +52,7 @@ form {
 .card {
   display: flex;
   justify-content: space-between;
-  background-color: #2e2d4e;
+  background-color: #21c4dafd;
   margin: 10px;
   width: 400px;
   border-radius: 10px;
@@ -67,7 +66,7 @@ form {
   
 
   & p {
-    color: #fff;
+    color: #050505;
     font-weight: bold;
   }
 

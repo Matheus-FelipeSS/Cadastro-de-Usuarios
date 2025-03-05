@@ -15,4 +15,8 @@ body{
   background-color: #00eeff;
   background-repeat: no-repeat;
   background-size: cover;
+  background-image: url(image.jpg);
+  background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
