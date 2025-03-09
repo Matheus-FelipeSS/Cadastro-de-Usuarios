@@ -13,6 +13,7 @@ function Home() {
   const inputName = useRef();
   const inputAge = useRef();
   const inputEmail = useRef();
+  
 
   function isEmailValid(email) {
     const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -94,9 +95,9 @@ function Home() {
     <div className="container">
       <form onSubmit={handleSubmit}>
         <h1>{editingUser ? "Editar Usuário" : "Cadastro de Usuário"}</h1>
-        <input placeholder="Nome" name="nome" type="text" ref={inputName} maxLength={30} />
+        <input placeholder="Nome" name="nome" type="text" ref={inputName} maxLength={60} />
         <input placeholder="Idade" name="idade" type="number" ref={inputAge} />
-        <input placeholder="E-mail" name="email" type="email" ref={inputEmail} maxLength={30} />
+        <input placeholder="E-mail" name="email" type="email" ref={inputEmail} maxLength={80} />
         
         
         {emailError && <span className="error-message">{emailError}</span>}
