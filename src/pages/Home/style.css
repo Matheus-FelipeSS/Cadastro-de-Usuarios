@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding-top: 100px;
+  padding-top: 11px;
 }
 
 h1 {
@@ -49,12 +49,30 @@ form {
   }
 }
 
+.card-container {
+  max-height: 400px; 
+  overflow-y: scroll;
+  width: 100%;
+  max-width: 400px;
+  background-color: transparent;
+  padding: 10px;
+  margin-top: 20px;
+  box-sizing: border-box;
+
+  scrollbar-width: none;
+}
+
+.card-container::-webkit-scrollbar {
+  display: none;
+}
+
 .card {
   display: flex;
   justify-content: space-between;
   background-color: #21c4dafd;
-  margin: 10px;
-  width: 400px;
+  margin: 10px 0;
+  width: 100%;
+  max-width: 400px;
   border-radius: 10px;
   padding: 10px;
   word-wrap: break-word;
@@ -62,6 +80,17 @@ form {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  
+  .card button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    gap: 10px;
+  }
+  
+  .card button:hover {
+    opacity: 0.7;
+  }
   
   
 

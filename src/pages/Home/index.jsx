@@ -13,7 +13,6 @@ function Home() {
   const inputName = useRef();
   const inputAge = useRef();
   const inputEmail = useRef();
-  
 
   function isEmailValid(email) {
     const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -32,8 +31,8 @@ function Home() {
       email: inputEmail.current.value,
     });
     getUsers();
-    resetForm();  
-    setSuccessMessage ("Usuário cadastrado com sucesso!");
+    resetForm();
+    setSuccessMessage("Usuário cadastrado com sucesso!");
   }
 
   async function updateUser(id) {
@@ -89,51 +88,62 @@ function Home() {
 
   useEffect(() => {
     getUsers();
-  }, );
+  });
 
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
         <h1>{editingUser ? "Editar Usuário" : "Cadastro de Usuário"}</h1>
-        <input placeholder="Nome" name="nome" type="text" ref={inputName} maxLength={60} />
+        <input
+          placeholder="Nome"
+          name="nome"
+          type="text"
+          ref={inputName}
+          maxLength={50}
+        />
         <input placeholder="Idade" name="idade" type="number" ref={inputAge} />
-        <input placeholder="E-mail" name="email" type="email" ref={inputEmail} maxLength={80} />
-        
-        
+        <input
+          placeholder="E-mail"
+          name="email"
+          type="email"
+          ref={inputEmail}
+          maxLength={50}
+        />
+
         {emailError && <span className="error-message">{emailError}</span>}
 
-        
-        <button type="submit">
-          {editingUser ? "Atualizar" : "Cadastrar"}
-        </button>
+        <button type="submit">{editingUser ? "Atualizar" : "Cadastrar"}</button>
       </form>
 
-       
-       {successMessage && <div className="success-message">{successMessage}</div>}
+      {successMessage && (
+        <div className="success-message">{successMessage}</div>
+      )}
 
-      {users.map((user) => (
-        <div key={user.id} className="card">
-          <div>
-            <p>
-              Nome: <span>{user.name}</span>
-            </p>
-            <p>
-              Idade: <span>{user.age}</span>
-            </p>
-            <p>
-              Email: <span>{user.email}</span>
-            </p>
+      <div className="card-container">
+        {users.map((user) => (
+          <div key={user.id} className="card">
+            <div>
+              <p>
+                Nome: <span>{user.name}</span>
+              </p>
+              <p>
+                Idade: <span>{user.age}</span>
+              </p>
+              <p>
+                Email: <span>{user.email}</span>
+              </p>
+            </div>
+            <div className="button-edit-delet">
+              <button onClick={() => handleEdit(user)}>
+                <img src={Edit} alt="Edit" />
+              </button>
+              <button onClick={() => deleteUser(user.id)}>
+                <img src={Trash} alt="Delete" />
+              </button>
+            </div>
           </div>
-          <div className="button-edit-delet">
-            <button onClick={() => handleEdit(user)}>
-              <img src={Edit} alt="Edit" />
-            </button>
-            <button onClick={() => deleteUser(user.id)}>
-              <img src={Trash} alt="Delete" />
-            </button>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
