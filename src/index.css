@@ -12,8 +12,6 @@ html {
 body{
   min-height: 100%;
   width: 100%;
-  background-color: #00eeff;
-  background-repeat: no-repeat;
   background-size: cover;
   background-image: url(image.jpg);
   background-repeat: no-repeat;

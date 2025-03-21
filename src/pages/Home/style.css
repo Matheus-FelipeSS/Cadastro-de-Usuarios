@@ -17,7 +17,7 @@ form {
   gap: 30px;
   padding: 30px;
   border-radius: 10px;
-  background-color: #32d7ec9f;
+  background-color: #20cce2bb;
   max-width: 65%;
   width: 400px;
   margin-bottom: 20px;
@@ -58,7 +58,6 @@ form {
   padding: 10px;
   margin-top: 20px;
   box-sizing: border-box;
-
   scrollbar-width: none;
 }
 
@@ -69,7 +68,7 @@ form {
 .card {
   display: flex;
   justify-content: space-between;
-  background-color: #21c4dafd;
+  background-color: #20cce2bb;
   margin: 10px 0;
   width: 100%;
   max-width: 400px;
@@ -80,6 +79,26 @@ form {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  position: relative;
+}
+
+.card:hover .button-edit-delet {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all;
+}
+
+.card .button-edit-delet {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+  transition: opacity 0.3s, visibility 0.3s;
+}
   
   .card button {
     background-color: transparent;
@@ -119,4 +138,3 @@ form {
   & button:hover {
     opacity: 0.5;
   }
-}
