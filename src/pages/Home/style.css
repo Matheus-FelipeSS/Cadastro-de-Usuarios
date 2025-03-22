@@ -111,8 +111,6 @@ form {
     opacity: 0.7;
   }
   
-  
-
   & p {
     color: #050505;
     font-weight: bold;
@@ -138,3 +136,34 @@ form {
   & button:hover {
     opacity: 0.5;
   }
+
+  .popup {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: #73c7f1;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgb(0, 238, 255);
+  }
+
+.popup-visible {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup-content {
+  color: #000000;
+  padding: 20px 25px;
+  border-radius: 8px;
+  text-align: center;
+  width: 300px;
+  font-size: 16px;
+}
+
+.popup p {
+  margin: 0;
+  padding: 0;
+}

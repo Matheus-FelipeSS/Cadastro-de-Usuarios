@@ -8,7 +8,8 @@ function Home() {
   const [users, setUsers] = useState([]);
   const [editingUser, setEditingUser] = useState();
   const [emailError, setEmailError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const [popupMessage, setPopupMessage] = useState("");
+  const [popupVisible, setPopupVisible] = useState(false);
 
   const inputName = useRef();
   const inputAge = useRef();
@@ -32,7 +33,12 @@ function Home() {
     });
     getUsers();
     resetForm();
-    setSuccessMessage("Usuário cadastrado com sucesso!");
+    setPopupMessage("Usuário cadastrado com sucesso!");
+    setPopupVisible(true);
+
+    setTimeout(() => {
+      setPopupVisible(false);
+    }, 3000);
   }
 
   async function updateUser(id) {
@@ -44,12 +50,23 @@ function Home() {
     getUsers();
     setEditingUser();
     resetForm();
-    setSuccessMessage("Usuário atualizado com sucesso!");
+    setPopupMessage("Usuário atualizado com sucesso!");
+    setPopupVisible(true);
+
+    setTimeout(() => {
+      setPopupVisible(false);
+    }, 3000);
   }
 
   async function deleteUser(id) {
     await api.delete(`/usuarios/${id}`);
     getUsers();
+    setPopupMessage("Usuário excluído com sucesso!");
+    setPopupVisible(true);
+
+    setTimeout(() => {
+      setPopupVisible(false);
+    }, 3000);
   }
 
   const handleEdit = (user) => {
@@ -61,15 +78,20 @@ function Home() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+  
     const email = inputEmail.current.value;
-
+  
     if (!isEmailValid(email)) {
       if (!email.includes("@")) {
-        setEmailError("Por favor, insira um email válido.");
+        setEmailError("Por favor, insira um email válido.");
       } else {
-        setEmailError("Por favor, insira um email válido.");
+        setEmailError("Por favor, insira um email válido.");
       }
+  
+      setTimeout(() => {
+        setEmailError("");
+      }, 3000);
+  
       return;
     }
 
@@ -88,7 +110,7 @@ function Home() {
 
   useEffect(() => {
     getUsers();
-  });
+  }, []);
 
   return (
     <div className="container">
@@ -115,9 +137,12 @@ function Home() {
         <button type="submit">{editingUser ? "Atualizar" : "Cadastrar"}</button>
       </form>
 
-      {successMessage && (
-        <div className="success-message">{successMessage}</div>
-      )}
+
+      <div className={`popup ${popupVisible ? "popup-visible" : ""}`}>
+        <div className="popup-content">
+          <p>{popupMessage}</p>
+        </div>
+      </div>
 
       <div className="card-container">
         {users.map((user) => (
