@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import "./style.css";
+import { ToastContainer, toast } from 'react-toastify';
 import Trash from "../../assets/trash-regular.png";
 import Edit from "../../assets/edit-alt-regular.png";
 import api from "../../services/api";
@@ -8,8 +9,7 @@ function Home() {
   const [users, setUsers] = useState([]);
   const [editingUser, setEditingUser] = useState();
   const [emailError, setEmailError] = useState("");
-  const [popupMessage, setPopupMessage] = useState("");
-  const [popupVisible, setPopupVisible] = useState(false);
+  const notify = (text) => toast(text);
 
   const inputName = useRef();
   const inputAge = useRef();
@@ -26,47 +26,51 @@ function Home() {
   }
 
   async function createUsers() {
-    await api.post("/usuarios", {
-      name: inputName.current.value,
-      age: inputAge.current.value,
-      email: inputEmail.current.value,
-    });
-    getUsers();
-    resetForm();
-    setPopupMessage("Usuário cadastrado com sucesso!");
-    setPopupVisible(true);
-
-    setTimeout(() => {
-      setPopupVisible(false);
-    }, 3000);
+    try {
+      await api.post("/usuarios", {
+        name: inputName.current.value,
+        age: inputAge.current.value,
+        email: inputEmail.current.value,
+      });
+     {
+      notify("Usuário cadastrado com sucesso!");
+      getUsers();
+      resetForm();
+      }
+    } catch (error) {
+      console.log(error);
+      notify("Ocorreu um erro ao cadastrar o usuário.");
+    }
   }
 
   async function updateUser(id) {
-    await api.put(`/usuarios/${id}`, {
-      name: inputName.current.value,
-      age: inputAge.current.value,
-      email: inputEmail.current.value,
-    });
-    getUsers();
-    setEditingUser();
-    resetForm();
-    setPopupMessage("Usuário atualizado com sucesso!");
-    setPopupVisible(true);
-
-    setTimeout(() => {
-      setPopupVisible(false);
-    }, 3000);
+    try {
+      await api.put(`/usuarios/${id}`, {
+        name: inputName.current.value,
+        age: inputAge.current.value,
+        email: inputEmail.current.value,
+      });
+      notify("Usuário editado com sucesso!");
+      getUsers();
+      setEditingUser();
+      resetForm();
+    } catch (error) {
+      console.log(error);
+      notify("Ocorreu um erro ao atualizar o usuário.");
+    }
+    
   }
 
   async function deleteUser(id) {
-    await api.delete(`/usuarios/${id}`);
+    try {
+      await api.delete(`/usuarios/${id}`);
+    notify("Usuário deletado com sucesso!");
     getUsers();
-    setPopupMessage("Usuário excluído com sucesso!");
-    setPopupVisible(true);
-
-    setTimeout(() => {
-      setPopupVisible(false);
-    }, 3000);
+    } catch (error) {
+      console.log(error);
+      notify("Ocorreu um erro ao deletar o usuário.");
+    }
+    
   }
 
   const handleEdit = (user) => {
@@ -114,6 +118,7 @@ function Home() {
 
   return (
     <div className="container">
+      <ToastContainer />
       <form onSubmit={handleSubmit}>
         <h1>{editingUser ? "Editar Usuário" : "Cadastro de Usuário"}</h1>
         <input
@@ -136,13 +141,6 @@ function Home() {
 
         <button type="submit">{editingUser ? "Atualizar" : "Cadastrar"}</button>
       </form>
-
-
-      <div className={`popup ${popupVisible ? "popup-visible" : ""}`}>
-        <div className="popup-content">
-          <p>{popupMessage}</p>
-        </div>
-      </div>
 
       <div className="card-container">
         {users.map((user) => (
@@ -167,6 +165,7 @@ function Home() {
               </button>
             </div>
           </div>
+          
         ))}
       </div>
     </div>
